@@ -16,6 +16,7 @@
 
   <!-- Bootstrap CSS File -->
   <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
 
   <!-- Libraries CSS Files -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -31,6 +32,44 @@
     Theme Name: Zirak
     Author: Ahmad Zaki Wahedy
   ======================================================= -->
+  <style>
+  .rate {
+    float: left;
+    height: 46px;
+    padding: 0 10px;
+}
+.rate:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+}
+.rate:not(:checked) > label {
+    float:right;
+    width:1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:30px;
+    color:#ccc;
+}
+.rate:not(:checked) > label:before {
+    content: '★ ';
+}
+.rate > input:checked ~ label {
+    color: #ffc700;    
+}
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+    color: #deb217;  
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+    color: #c59b08;
+}
+
+  </style>
 </head>
 
 <body>
@@ -645,10 +684,12 @@
                       use App\Models\Comments;
                       $comments = Comments::orderBy('rating', 'desc')->take(6)->get();
                     @endphp
-              <div>
+              <div style="display: flex;
+              flex-direction: column; gap: 24px;">
                 @foreach ($comments as $comment)
-                <div class="card" > 
+                <div class="card" style="padding: 24px; border-radius: 10px;" > 
                   <p class="card-text">
+                    <span class="stars-p">
                   @if ($comment->rating==1)
                   <i class="fas fa-star golden"></i>
                   <i class="fas fa-star"></i>
@@ -679,8 +720,9 @@
                   <i class="fas fa-star golden"></i>
                   <i class="fas fa-star golden"></i>
                   <i class="fas fa-star golden"></i>
+                  </span>
                   @endif
-                  <br>{{ __('landing.Name') }}{{$comment->name}} <br>{{ __('landing.Comment') }}{{$comment->content}}</p>
+                  <br><b>{{ __('landing.Name') }}:</b> {{$comment->name}}<br><b>{{ __('landing.Comment') }}:</b> {{$comment->content}}</p>
                 </div>
                 @endforeach
               </div>
@@ -693,47 +735,30 @@
                     <input type="text" name="name" class="form-control" id="name" placeholder="{{ __('landing.Your Name') }}" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
                     <div class="validation"></div>
                   </div>
-                <div class="form-group col-lg-6">
-
-                  <select class="form-control " name="rating" id="" required>
-                    <option value="" disabled selected>{{ __('landing.Please Rate Us') }}</option>
-                    <option value="1">
-                      <i class="fas fa-star golden"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                    </option>
-                    <option value="2">
-                      <i class="fas fa-star golden"></i>
-                      <i class="fas fa-star golden"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                    </option>
-                    <option value="3">
-                      <i class="fas fa-star golden"></i>
-                      <i class="fas fa-star golden"></i>
-                      <i class="fas fa-star golden"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                    </option>
-                    <option value="4">
-                      <i class="fas fa-star golden"></i>
-                      <i class="fas fa-star golden"></i>
-                      <i class="fas fa-star golden"></i>
-                      <i class="fas fa-star golden"></i>
-                      <i class="fas fa-star"></i>
-                    </option>
-                    <option value="5">
-                      <i class="fas fa-star golden"></i>
-                      <i class="fas fa-star golden"></i>
-                      <i class="fas fa-star golden"></i>
-                      <i class="fas fa-star golden"></i>
-                      <i class="fas fa-star golden"></i>
-                    </option>
-                  </select>
-                </div>
+                  <div class="form-group col-lg-6">
+                    <!-- <div class="rate">
+                      <input type="radio" id="star5" name="rate" value="5" />
+                      <label for="star5" title="text">5 stars</label>
+                      <input type="radio" id="star4" name="rate" value="4" />
+                      <label for="star4" title="text">4 stars</label>
+                      <input type="radio" id="star3" name="rate" value="3" />
+                      <label for="star3" title="text">3 stars</label>
+                      <input type="radio" id="star2" name="rate" value="2" />
+                      <label for="star2" title="text">2 stars</label>
+                      <input type="radio" id="star1" name="rate" value="1" />
+                      <label for="star1" title="text">1 star</label>
+                    </div> -->
+                    <select class="form-control stars-feedback" name="rating" required>
+                      <option value="" disabled selected>{{ __('landing.Please Rate Us') }}</option>
+                      <option value="1">
+                        ★☆☆☆☆
+                      </option>
+                      <option value="2">★★☆☆☆</option>
+                      <option value="3">★★★☆☆</option>
+                      <option value="4">★★★★☆</option>
+                      <option value="5">★★★★★</option>
+                    </select>
+                  </div>
                 <div class="form-group col-lg-12">
                   <textarea class="form-control" name="message" rows="5" data-rule="required" placeholder="{{ __('landing.Comment text') }}"></textarea>
                   <div class="validation"></div>
