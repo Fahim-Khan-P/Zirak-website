@@ -38,10 +38,10 @@
                                     <span class="text-muted float-end">{{$comment->created_at}}</span> <span
                                         class="badge bg-primary">{{$comment->rating}}</span> <span
                                         class="action-icons">
-                                        <form action="{{route('comment.destroy',[$comment->id])}}" method="POST">
+                                        <form  style="position: relative; left: 47%;" action="{{route('comment.destroy',[$comment->id])}}" method="POST">
                                             @method('DELETE')
                                             @csrf
-                                        <button type="submit" class="btn btn-primary"><i class="fas fa-trash-alt recycle-bin-icon"></i></button>
+                                        <button type="submit" style="border: none;"><i class="fas fa-trash-alt recycle-bin-icon" style="font-size: 30px; color: rgb(255, 45, 45);"></i></button>
                                       </form>
                                     </span>
                                 </div>

@@ -632,7 +632,7 @@
             <div class="info">
               <div>
                 <i class="ion-ios-location-outline"></i>
-                <p>{{ __('landing.Address line1') }}<br>{{ __('landing.Address line2') }}</p>
+                <p>{{ __('landing.Address line1') }}{{ __('landing.Address line2') }}</p>
                 
               </div>
 
@@ -685,44 +685,46 @@
                       $comments = Comments::orderBy('rating', 'desc')->take(6)->get();
                     @endphp
               <div style="display: flex;
-              flex-direction: column; gap: 24px;">
+              flex-direction: column; gap: 5px;">
                 @foreach ($comments as $comment)
-                <div class="card" style="padding: 24px; border-radius: 10px;" > 
+                <div class="card" style="padding: 15px; border-radius: 10px; background-color: whitesmoke;" > 
                   <p class="card-text">
-                    <span class="stars-p">
-                  @if ($comment->rating==1)
-                  <i class="fas fa-star golden"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  @elseif ($comment->rating==2)
-                  <i class="fas fa-star golden"></i>
-                  <i class="fas fa-star golden"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  @elseif ($comment->rating==3)
-                  <i class="fas fa-star golden"></i>
-                  <i class="fas fa-star golden"></i>
-                  <i class="fas fa-star golden"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  @elseif ($comment->rating==4)
-                  <i class="fas fa-star golden"></i>
-                  <i class="fas fa-star golden"></i>
-                  <i class="fas fa-star golden"></i>
-                  <i class="fas fa-star golden"></i>
-                  <i class="fas fa-star"></i>
-                  @elseif ($comment->rating==5)
-                  <i class="fas fa-star golden"></i>
-                  <i class="fas fa-star golden"></i>
-                  <i class="fas fa-star golden"></i>
-                  <i class="fas fa-star golden"></i>
-                  <i class="fas fa-star golden"></i>
-                  </span>
-                  @endif
-                  <br><b>{{ __('landing.Name') }}:</b> {{$comment->name}}<br><b>{{ __('landing.Comment') }}:</b> {{$comment->content}}</p>
+                   
+                  <b style="color: rgba(0, 0, 255, 0.614);" style="margin-right: 8px;">{{ __('landing.Name') }}:</b> {{$comment->name}}<b style="margin-left: 24px;">{{ __('landing.Comment') }}:</b> {{$comment->content}}
+                  <span class="stars-p" style="float: right;">
+                    @if ($comment->rating==1)
+                    <i class="fas fa-star golden"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    @elseif ($comment->rating==2)
+                    <i class="fas fa-star golden"></i>
+                    <i class="fas fa-star golden"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    @elseif ($comment->rating==3)
+                    <i class="fas fa-star golden"></i>
+                    <i class="fas fa-star golden"></i>
+                    <i class="fas fa-star golden"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    @elseif ($comment->rating==4)
+                    <i class="fas fa-star golden"></i>
+                    <i class="fas fa-star golden"></i>
+                    <i class="fas fa-star golden"></i>
+                    <i class="fas fa-star golden"></i>
+                    <i class="fas fa-star"></i>
+                    @elseif ($comment->rating==5)
+                    <i class="fas fa-star golden"></i>
+                    <i class="fas fa-star golden"></i>
+                    <i class="fas fa-star golden"></i>
+                    <i class="fas fa-star golden"></i>
+                    <i class="fas fa-star golden"></i>
+                    </span>
+                    @endif</p>
+                  
                 </div>
                 @endforeach
               </div>
@@ -736,27 +738,15 @@
                     <div class="validation"></div>
                   </div>
                   <div class="form-group col-lg-6">
-                    <!-- <div class="rate">
-                      <input type="radio" id="star5" name="rate" value="5" />
-                      <label for="star5" title="text">5 stars</label>
-                      <input type="radio" id="star4" name="rate" value="4" />
-                      <label for="star4" title="text">4 stars</label>
-                      <input type="radio" id="star3" name="rate" value="3" />
-                      <label for="star3" title="text">3 stars</label>
-                      <input type="radio" id="star2" name="rate" value="2" />
-                      <label for="star2" title="text">2 stars</label>
-                      <input type="radio" id="star1" name="rate" value="1" />
-                      <label for="star1" title="text">1 star</label>
-                    </div> -->
                     <select class="form-control stars-feedback" name="rating" required>
                       <option value="" disabled selected>{{ __('landing.Please Rate Us') }}</option>
-                      <option value="1">
+                      <option  rating="1" value="1">
                         ★☆☆☆☆
                       </option>
-                      <option value="2">★★☆☆☆</option>
-                      <option value="3">★★★☆☆</option>
-                      <option value="4">★★★★☆</option>
-                      <option value="5">★★★★★</option>
+                      <option  rating="2" value="2">★★☆☆☆</option>
+                      <option  rating="3"  value="3">★★★☆☆</option>
+                      <option  rating="4" value="4">★★★★☆</option>
+                      <option  rating="5" value="5">★★★★★</option>
                     </select>
                   </div>
                 <div class="form-group col-lg-12">
