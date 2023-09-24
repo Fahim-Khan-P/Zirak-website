@@ -1,12 +1,12 @@
 @extends('admin.layout.app') <!-- Extend the master layout -->
 @section('content') <!-- Define the content specific to this page -->
-<div class ="container  mt-5">
+<div class="container  mt-5">
     <style>
         .table {
             width: 100%;
             border-collapse: collapse;
         }
-    
+
         .table td {
             max-width: 155px;
             max-height: 100px;
@@ -14,17 +14,55 @@
             text-overflow: ellipsis;
             white-space: nowrap;
         }
+
+        .post-card {
+            transition: transform 0.5s ease;
+        }
+
+        .post-card:hover {
+            transform: rotateY(24deg);
+        }
+
+        .update-button,
+        .delete-button {
+            padding: 8px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-weight: 700;
+        }
+
+        .update-button {
+            background-color: rgba(0, 0, 255, 0.706);
+
+        }
+
+        .update-button:hover {
+            background-color: white;
+            color: rgba(0, 0, 255, 0.706);
+        }
+
+        .delete-button {
+            background-color: rgb(126, 2, 2);
+        }
+
+        .delete-button:hover {
+            background-color: white;
+            color: rgb(126, 2, 2);
+            ;
+        }
     </style>
     <div class="page-breadcrumb">
         <div class="row align-items-center">
             <div class="col-6">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 d-flex align-items-center">
-                      <li class="breadcrumb-item"><a href="{{route('dash')}}" class="link"><i class="mdi mdi-home-outline fs-4"></i></a></li>
-                      <li class="breadcrumb-item active" aria-current="page">Posts</li>
+                        <li class="breadcrumb-item"><a href="{{route('dash')}}" class="link"><i
+                                    class="mdi mdi-home-outline fs-4"></i></a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Posts</li>
                     </ol>
-                  </nav>
-                <h1 class="mb-0 fw-bold">Posts</h1> 
+                </nav>
+                <h1 class="mb-0 fw-bold">Posts</h1>
             </div>
         </div>
     </div>
@@ -44,7 +82,8 @@
                                     <h4 class="card-title">Recent Posts</h4>
                                     <h5 class="card-subtitle">Overview of Recent Posts</h5>
                                 </div>
-                                <div ><a href="{{route('admin.new')}}"><button class="btn btn-primary">New Post</button></a></div>
+                                <div><a href="{{route('admin.new')}}"><button class="btn btn-primary">New
+                                            Post</button></a></div>
                             </div>
                             <!-- title -->
                             <div class="table-responsive">
@@ -65,19 +104,20 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($posts as $post)
-                                        <tr>
+                                        <tr class="post-card">
                                             <td>
                                                 <form action="{{route('post.destroy',[$post->id])}}" method="POST">
                                                     @method('DELETE')
                                                     @csrf
-                                                <button type="submit">Delete</button>
-                                              </form>
+                                                    <button type="submit"
+                                                        class="delete-button btn-danger">Delete</button>
+                                                </form>
                                             </td>
                                             <td>
                                                 <form action="{{route('admin.change')}}" method="POST">
                                                     @csrf
-                                                <input type="hidden" name="post_id" value="{{$post->id}}">
-                                                <input type="submit" value="Update">
+                                                    <input type="hidden" name="post_id" value="{{$post->id}}">
+                                                    <input type="submit" value="Update" class="update-button">
                                                 </form>
                                             </td>
                                             <td>
@@ -100,8 +140,8 @@
                                             <td><label class="badge bg-info">{{$post->created_at}}</label></td>
                                             <td><label class="badge bg-info">{{$post->updated_at}}</label></td>
                                         </tr>
-                                        
-                                        @endforeach 
+
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

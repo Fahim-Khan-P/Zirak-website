@@ -7,8 +7,39 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    integrity="sha512-..." crossorigin="anonymous" />
   <title>Our projects</title>
   <style>
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      padding: 12px;
+      background: linear-gradient(45deg, #1de099, #1dc8cd);
+    }
+
+    .nav ul {
+      list-style-type: none;
+      display: flex;
+      justify-content: center;
+      justify-self: center;
+      gap: 40px;
+      padding-top: 12px;
+    }
+
+    .nav ul li i {
+      padding-top: 18px;
+    }
+
+    .nav ul li:hover {
+      cursor: pointer;
+    }
+
     .parent-container {
       display: flex;
       flex-direction: column;
@@ -26,6 +57,12 @@
       align-self: center;
       margin-top: 50px;
       animation: fade-in 0.5s ease-in-out;
+      background-color: #eeedeb89;
+      transition: transform 0.5s ease;
+    }
+
+    .post:hover {
+      transform: rotateY(30deg);
     }
 
     .image-container {
@@ -93,6 +130,16 @@
 </head>
 
 <body>
+  <nav class="nav">
+    <ul>
+      <li class="back"><a href="#"><i class="fa-solid fa-arrow-left fa-2xl"></i></a></li>
+      <li class="our-project">
+        <h3>
+          Our Projects
+        </h3>
+      </li>
+    </ul>
+  </nav>
   <div class="parent-container">
     @foreach ($posts as $post)
     @php
@@ -146,7 +193,7 @@
         <p class="project-title">Project Title: {{$post->title}}</p>
         <p class="project-date">Start Date: {{$post->started_at}}</p>
         <p class="project-date">End Date: {{$post->ended_at}}</p>
-        <p class="project-info">Project Information: {{$post->content}}</p>
+        <p class="project-info" style="overflow: hidden; width: 90;">Project Information: {{$post->content}}</p>
         @elseif ($lang == 'fa')
         <p class="project-title">{{$post->title}}: عنوان پروژه</p>
         <p class="project-date">{{$post->started_at}}: شروع پروژه</p>
@@ -162,6 +209,39 @@
     </div>
     @endforeach
   </div>
+
+  <script>
+    let slideIndex = 1;
+    showSlides(slideIndex);
+
+    function plusSlides(n) {
+      showSlides(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+      showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+      let i;
+      let slides = document.getElementsByClassName("mySlides");
+      let dots = document.getElementsByClassName("dot");
+      if (n > slides.length) {
+        slideIndex = 1;
+      }
+      if (n < 1) {
+        slideIndex = slides.length;
+      }
+      for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+      for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+      }
+      slides[slideIndex - 1].style.display = "block";
+      dots[slideIndex - 1].className += " active";
+    }
+  </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
