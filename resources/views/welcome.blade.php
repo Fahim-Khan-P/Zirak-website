@@ -37,22 +37,81 @@
       background-color: grey;
       font-weight: bolder;
     }
+    .popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
+    z-index: 9999;
+    transition: opacity 0.3s ease;
+}
+
+.popup.show {
+    display: flex;
+}
+
+.popup-content {
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.popup.show .popup-content {
+    opacity: 1;
+    transform: translateY(0);
+}
+#popupMessage {
+  font-weight: bolder;
+  color: rgba(0, 204, 255, 0.864);
+}
+
+.fa-check {
+  margin-left: 12px;
+  color: rgba(0, 204, 255, 0.94);
+  font-weight: bolder;
+  font-size: 24px;
+  margin-top: 4px;
+}
   </style>
 </head>
 
 <body>
-<!-- =======================================================
-    Theme Name: Zirak
-    Author: Ahmad Zaki Wahedy
-  ======================================================= -->
-  <!--==========================
-    Header
-  ============================-->
+  <div id="popup" class="popup">
+      <div class="popup-content">
+        <i class="fa fa-check" aria-hidden="true"></i> <span id="popupMessage"></span>
+      </div>
+  </div>
+  
   @if(session('send'))
-    <div class="alert alert-info">
-        {{ session('send') }}
-    </div>
-@endif
+      <script>
+          // Function to show the success message popup
+          function showSuccessMessage(message) {
+              var popup = document.getElementById('popup');
+              var popupMessage = document.getElementById('popupMessage');
+              popupMessage.textContent = message;
+              popup.classList.add('show');
+  
+              setTimeout(function() {
+                  popup.classList.remove('show');
+              }, 5000); // Hide the popup after 2 seconds
+          }
+  
+          // Call the showSuccessMessage function with the session success message
+          showSuccessMessage("{{ session('send') }}");
+      </script>
+  @endif
+
   <header id="header">
     <div class="container">
 
@@ -622,20 +681,20 @@
                 @csrf
                 <div class="form-row">
                   <div class="form-group col-lg-6">
-                    <input type="text" name="name" class="form-control" id="name" placeholder="{{ __('landing.Your Name') }}" required/>
+                    <input type="text" name="name" style="border-radius: 30px;" class="form-control" id="name" placeholder="{{ __('landing.Your Name') }}" required/>
                     <div class="validation"></div>
                   </div>
                   <div class="form-group col-lg-6">
-                    <input type="email" class="form-control" name="email" id="email" placeholder="{{ __('landing.Your Email') }}" data-rule="email" required/>
+                    <input type="email" class="form-control" style="border-radius: 30px;" name="email" id="email" placeholder="{{ __('landing.Your Email') }}" data-rule="email" required/>
                     <div class="validation"></div>
                   </div>
                 </div>
                 <div class="form-group">
-                  <input type="text" class="form-control" name="subject" id="subject" placeholder="{{ __('landing.Subject') }}" required/>
+                  <input type="text" class="form-control" style="border-radius: 30px;" name="subject" id="subject" placeholder="{{ __('landing.Subject') }}" required/>
                   <div class="validation"></div>
                 </div>
                 <div class="form-group">
-                  <textarea class="form-control" name="message" rows="5" data-rule="required" placeholder="{{ __('landing.Message') }}" required></textarea>
+                  <textarea class="form-control" name="message" rows="5" style="border-radius: 20px;"  data-rule="required" placeholder="{{ __('landing.Message') }}" required></textarea>
                   <div class="validation"></div>
                 </div>
                 <div class="text-center"><button type="submit" title="Send Message">{{ __('landing.Send Message') }}</button></div>
@@ -652,6 +711,8 @@
                       use App\Models\Comments;
                       $comments = Comments::orderBy('rating', 'desc')->take(6)->get();
                     @endphp
+
+                    
               <div style="display: flex;
               flex-direction: column; gap: 5px;">
                 @foreach ($comments as $comment)
@@ -702,11 +763,12 @@
                 @csrf
                 <div class="form-row">
                   <div class="form-group col-lg-6">
-                    <input type="text" name="name" class="form-control" id="name" placeholder="{{ __('landing.Your Name') }}" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                    <input type="text" name="name" class="form-control" id="name" placeholder="{{ __('landing.Your Name') }}" data-rule="minlen:4" data-msg="Please enter at least 4 chars"
+                    style="border-radius: 30px;" />
                     <div class="validation"></div>
                   </div>
                   <div class="form-group col-lg-6">
-                    <select class="form-control stars-feedback" name="rating" required>
+                    <select class="form-control stars-feedback" style="border-radius: 30px;"  name="rating" required>
                       <option value="" disabled selected>{{ __('landing.Please Rate Us') }}</option>
                       <option  rating="1" value="1">
                         ★☆☆☆☆
@@ -718,7 +780,7 @@
                     </select>
                   </div>
                 <div class="form-group col-lg-12">
-                  <textarea class="form-control" name="message" rows="5" data-rule="required" placeholder="{{ __('landing.Comment text') }}"></textarea>
+                  <textarea class="form-control" style="border-radius: 20px;" name="message" rows="5" data-rule="required" placeholder="{{ __('landing.Comment text') }}"></textarea>
                   <div class="validation"></div>
                 </div>
                 <div class="text-center"><button type="submit" class="send_comment" title="Send Message">{{ __('landing.Send Comment') }}</button></div>
