@@ -34,7 +34,7 @@
             <div class="form-group">
                 <label for="content">Add Images For This Post::
                 </label>
-                <input type="file" class="form-control" id="image" name="images[]" multiple accept="image/*">
+                <input type="file" class="form-control" id="image" name="images[]" multiple accept="image/*" required>
             </div>
             <button type="submit" class="btn btn-primary">Create Post</button>
         </form>

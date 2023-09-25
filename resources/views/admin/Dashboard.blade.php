@@ -1,12 +1,12 @@
 @extends('admin.layout.app') <!-- Extend the master layout -->
 @section('content') <!-- Define the content specific to this page -->
-<div class ="container  mt-5">
+<div class="container  mt-5">
     <style>
         .table {
             width: 100%;
             border-collapse: collapse;
         }
-    
+
         .table td {
             max-width: 155px;
             max-height: 100px;
@@ -20,11 +20,12 @@
             <div class="col-6">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 d-flex align-items-center">
-                      <li class="breadcrumb-item"><a href="{{route('dash')}}" class="link"><i class="mdi mdi-home-outline fs-4"></i></a></li>
-                      <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                        <li class="breadcrumb-item"><a href="{{route('dash')}}" class="link"><i
+                                    class="mdi mdi-home-outline fs-4"></i></a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
                     </ol>
-                  </nav>
-                <h1 class="mb-0 fw-bold">Dashboard</h1> 
+                </nav>
+                <h1 class="mb-0 fw-bold">Dashboard</h1>
             </div>
         </div>
     </div>
@@ -44,7 +45,8 @@
                                     <h4 class="card-title">Recent Posts</h4>
                                     <h5 class="card-subtitle">Overview of Recent Posts</h5>
                                 </div>
-                                <div ><a href="{{route('admin.new')}}"><button class="btn btn-primary">New Post</button></a></div>
+                                <div><a href="{{route('admin.new')}}"><button class="btn btn-primary">New
+                                            Post</button></a></div>
                             </div>
                             <!-- title -->
                             <div class="table-responsive">
@@ -85,8 +87,8 @@
                                             <td><label class="badge bg-info">{{$post->created_at}}</label></td>
                                             <td><label class="badge bg-info">{{$post->updated_at}}</label></td>
                                         </tr>
-                                        
-                                        @endforeach 
+
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -105,42 +107,82 @@
     <!-- Container fluid  -->
     <!-- ============================================================== -->
     <section id="comments">
-<!-- ============================================================== -->
+        <!-- ============================================================== -->
         <!-- ============================================================== -->
         <!-- Recent comment and chats -->
         <!-- ============================================================== -->
-            <!-- column -->
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">Recent Comments</h4>
-                    </div>
-                    <div class="comment-widgets scrollable">
-                        <!-- Comment Row -->
-                        @foreach ($comments as $comment)
-                        <div class="d-flex flex-row comment-row m-t-0">
-                            <div class="p-2"><img src="../assets/images/users/1.jpg" alt="user" width="50"
-                                    class="rounded-circle"></div>
-                            <div class="comment-text w-100">
-                                <h6 class="font-medium">{{$comment->name}}</h6>
-                                <span class="m-b-15 d-block">{{$comment->content}}</span>
-                                <div class="comment-footer">
-                                    <span class="text-muted float-end">{{$comment->created_at}}</span> <span
-                                        class="badge bg-primary">{{$comment->rating}}</span> <span
-                                        class="action-icons">
-                                        <a href="javascript:void(0)"><i class="ti-pencil-alt"></i></a>
-                                        <a href="javascript:void(0)"><i class="ti-check"></i></a>
-                                        <a href="javascript:void(0)"><i class="ti-heart"></i></a>
-                                    </span>
-                                </div>
+        <!-- column -->
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Recent Comments</h4>
+                </div>
+                <div class="comment-widgets scrollable">
+                    <!-- Comment Row -->
+                    @foreach ($comments as $comment)
+                    <div class="d-flex flex-row comment-row m-t-0">
+                        <div class="p-2"><img src="../assets/images/users/1.jpg" alt="user" width="50"
+                                class="rounded-circle"></div>
+                        <div class="comment-text w-100">
+                            <h6 class="font-medium">{{$comment->name}}</h6>
+                            <span class="m-b-15 d-block">{{$comment->content}}</span>
+                            <div class="comment-footer">
+                                <span class="text-muted float-end">{{$comment->created_at}}</span>
+                                <style>
+                                    .fa-star {
+                                        color: gainsboro;
+                                        font-size: 18px;
+                                    }
+                                    .golden {
+                                        color: goldenrod;
+                                    }
+                                </style>
+                                <span
+                                    class="badge">@if ($comment->rating==1)
+                                    <i class="fas fa-star golden"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    @elseif ($comment->rating==2)
+                                    <i class="fas fa-star golden"></i>
+                                    <i class="fas fa-star golden"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    @elseif ($comment->rating==3)
+                                    <i class="fas fa-star golden"></i>
+                                    <i class="fas fa-star golden"></i>
+                                    <i class="fas fa-star golden"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    @elseif ($comment->rating==4)
+                                    <i class="fas fa-star golden"></i>
+                                    <i class="fas fa-star golden"></i>
+                                    <i class="fas fa-star golden"></i>
+                                    <i class="fas fa-star golden"></i>
+                                    <i class="fas fa-star"></i>
+                                    @elseif ($comment->rating==5)
+                                    <i class="fas fa-star golden"></i>
+                                    <i class="fas fa-star golden"></i>
+                                    <i class="fas fa-star golden"></i>
+                                    <i class="fas fa-star golden"></i>
+                                    <i class="fas fa-star golden"></i>
+                                </span>
+                                @endif</p></span> <span class="action-icons">
+                                    <a href="javascript:void(0)"><i class="ti-pencil-alt"></i></a>
+                                    <a href="javascript:void(0)"><i class="ti-check"></i></a>
+                                    <a href="javascript:void(0)"><i class="ti-heart"></i></a>
+                                </span>
                             </div>
                         </div>
-                        @endforeach
                     </div>
-                    <a href="{{route('comment.index')}}"><button class="btn btn-primary">See More</button></a>
+                    @endforeach
                 </div>
+                <a href="{{route('comment.index')}}"><button class="btn btn-primary">See More</button></a>
             </div>
-            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
         <!-- Recent comment and chats -->
         <!-- ============================================================== -->
         <div class="col-lg-12">
@@ -160,8 +202,8 @@
                             <span class="m-b-15 d-block">Message:: {{$message->message}}</span>
                             <div class="comment-footer">
                                 <span class="text-muted float-end">Date:: {{$message->created_at}}</span>
-                                 <span class="badge bg-primary">{{$message->email}}</span> 
-                                 <span class="action-icons">
+                                <span class="badge bg-primary">{{$message->email}}</span>
+                                <span class="action-icons">
                                     <a href="javascript:void(0)"><i class="ti-pencil-alt"></i></a>
                                     <a href="javascript:void(0)"><i class="ti-check"></i></a>
                                     <a href="javascript:void(0)"><i class="ti-heart"></i></a>

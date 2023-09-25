@@ -8,37 +8,37 @@
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    integrity="sha512-..." crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
   <title>Our projects</title>
   <style>
-    .nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      display: flex;
-      flex-direction: row;
-      justify-content: flex-start;
-      padding: 12px;
-      background: linear-gradient(45deg, #1de099, #1dc8cd);
-    }
 
-    .nav ul {
-      list-style-type: none;
-      display: flex;
-      justify-content: center;
-      justify-self: center;
-      gap: 40px;
-      padding-top: 12px;
-    }
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding: 12px;
+  background: linear-gradient(45deg, #1de099, #1dc8cd);
+}
 
-    .nav ul li i {
-      padding-top: 18px;
-    }
+.nav ul {
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+  justify-self: center;
+  gap: 40px;
+  padding-top: 12px;
+}
 
-    .nav ul li:hover {
-      cursor: pointer;
-    }
+.nav ul li i {
+  padding-top: 18px;
+}
+
+.nav ul li:hover {
+  cursor: pointer;
+}
 
     .parent-container {
       display: flex;
@@ -58,24 +58,19 @@
       margin-top: 50px;
       animation: fade-in 0.5s ease-in-out;
       background-color: #eeedeb89;
-      transition: transform 0.5s ease;
-    }
-
-    .post:hover {
-      transform: rotateY(30deg);
     }
 
     .image-container {
       position: relative;
       overflow: hidden;
       width: 100%;
-      height: 300px;
+      height: 340px;
       border-radius: 10px;
     }
 
     .image-div {
       width: 100%;
-      height: 100%;
+      height: 43vh;
     }
 
     .no-image {
@@ -116,14 +111,11 @@
     }
 
     .carousel-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+      height: 43vh;
     }
 
     .carousel-container {
       width: 100%;
-      height: 300px;
       /* Adjust this value to your desired height */
     }
   </style>
@@ -177,13 +169,13 @@
           </div>
           <button class="carousel-control-prev" type="button" data-bs-target="#carousel{{ $post->id }}"
             data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
+            <span class="carousel-control-prev-icon bg-primary"  aria-hidden="true"></span>
+            <span class="visually-hidden bg-primary">Previous</span>
           </button>
           <button class="carousel-control-next" type="button" data-bs-target="#carousel{{ $post->id }}"
             data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
+            <span class="carousel-control-next-icon bg-primary" aria-hidden="true"></span>
+            <span class="visually-hidden bg-primary">Next</span>
           </button>
         </div>
         @endif
@@ -209,39 +201,6 @@
     </div>
     @endforeach
   </div>
-
-  <script>
-    let slideIndex = 1;
-    showSlides(slideIndex);
-
-    function plusSlides(n) {
-      showSlides(slideIndex += n);
-    }
-
-    function currentSlide(n) {
-      showSlides(slideIndex = n);
-    }
-
-    function showSlides(n) {
-      let i;
-      let slides = document.getElementsByClassName("mySlides");
-      let dots = document.getElementsByClassName("dot");
-      if (n > slides.length) {
-        slideIndex = 1;
-      }
-      if (n < 1) {
-        slideIndex = slides.length;
-      }
-      for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
-      }
-      for (i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i].className.replace(" active", "");
-      }
-      slides[slideIndex - 1].style.display = "block";
-      dots[slideIndex - 1].className += " active";
-    }
-  </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"

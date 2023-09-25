@@ -1,13 +1,13 @@
 @extends('admin.layout.app') <!-- Extend the master layout -->
 @section('content') <!-- Define the content specific to this page -->
 <style>
-.comment-row {
-  transition: transform 0.5s ease;
-}
+    .comment-row {
+        transition: transform 0.5s ease;
+    }
 
-.comment-row:hover {
-  transform: rotateY(30deg);
-}
+    .comment-row:hover {
+        transform: rotateY(30deg);
+    }
 </style>
 
 <div class="container  mt-5">
@@ -41,15 +41,57 @@
                     gap: 5px; background-color: rgba(240, 248, 255, 0.705); padding-right: 10px;">
                     <!-- Comment Row -->
                     @foreach ($comments as $comment)
-                    <div class="d-flex flex-row comment-row m-t-0" style="background-color: rgb(255, 255, 255); border-radius: 10px; margin: 5px;">
+                    <div class="d-flex flex-row comment-row m-t-0"
+                        style="background-color: rgb(255, 255, 255); border-radius: 10px; margin: 5px;">
                         <div class="p-2"><img src="../assets/images/users/1.jpg" alt="user" width="50"
                                 class="rounded-circle"></div>
                         <div class="comment-text w-100">
                             <h6 class="font-medium">{{$comment->name}}</h6>
                             <span class="m-b-15 d-block">{{$comment->content}}</span>
                             <div class="comment-footer">
-                                <span class="text-muted float-end">{{$comment->created_at}}</span> <span
-                                    class="badge bg-primary">{{$comment->rating}}</span> <span class="action-icons">
+                                <span class="text-muted float-end">{{$comment->created_at}}</span> 
+                                <style>
+                                    .fa-star {
+                                        color: gainsboro;
+                                        font-size: 18px;
+                                    }
+                                    .golden {
+                                        color: goldenrod;
+                                    }
+                                </style>
+                                <span
+                                    class="badge">@if ($comment->rating==1)
+                                    <i class="fas fa-star golden"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    @elseif ($comment->rating==2)
+                                    <i class="fas fa-star golden"></i>
+                                    <i class="fas fa-star golden"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    @elseif ($comment->rating==3)
+                                    <i class="fas fa-star golden"></i>
+                                    <i class="fas fa-star golden"></i>
+                                    <i class="fas fa-star golden"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    @elseif ($comment->rating==4)
+                                    <i class="fas fa-star golden"></i>
+                                    <i class="fas fa-star golden"></i>
+                                    <i class="fas fa-star golden"></i>
+                                    <i class="fas fa-star golden"></i>
+                                    <i class="fas fa-star"></i>
+                                    @elseif ($comment->rating==5)
+                                    <i class="fas fa-star golden"></i>
+                                    <i class="fas fa-star golden"></i>
+                                    <i class="fas fa-star golden"></i>
+                                    <i class="fas fa-star golden"></i>
+                                    <i class="fas fa-star golden"></i>
+                                </span>
+                                @endif</p></span> <span class="action-icons">
                                     <form style="position: relative; left: 47%;"
                                         action="{{route('comment.destroy',[$comment->id])}}" method="POST">
                                         @method('DELETE')
